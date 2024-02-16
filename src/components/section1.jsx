@@ -4,8 +4,11 @@ import Partners from "./partners";
 
 const Section1 = () => {
   return (
-    <div className="w-full bg-gray-900  p-2" id="services">
-      <div className="container mx-auto mb-10">
+    <div className="w-full bg-gray-900 min-h-screen p-2 " id="services">
+      <div className="container mx-auto mt-20 justify-center">
+      <p className="text-sm text-center md:text-lg font-bold text-gray-100 mb-4">
+                Services
+              </p>
         <h1 className="text-center text-2xl md:text-5xl font-bold text-white mb-12">
           Fueling Business Success with
           <br />
@@ -78,7 +81,7 @@ const Section1 = () => {
               />
             </div>
             <h2 className="text-xl font-bold text-white mb-4">
-              Enhances User Experience
+              Enhanced User Experience
             </h2>
             <p className="text-sm text-gray-300 text-center">
               Deliver seamless user experiences across all digital touchpoints

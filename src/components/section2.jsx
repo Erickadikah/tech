@@ -3,7 +3,7 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 const Section2 = () => {
   return (
-    <div className="w-full h-[45vh] lg:h-[40vh] xl:h-[60vh] flex flex-col justify-center items-center relative overflow-hidden"
+    <div className="w-full h-auto lg:h-[40vh] xl:h-[60vh] flex flex-col justify-center items-center relative overflow-hidden"
       style={{
         backgroundImage: `linear-gradient(rgba(21, 21, 21, 0.6), rgba(30, 29, 29, 0.6)),url(/images/ideas.jpg)`,
         backgroundPosition: "center",

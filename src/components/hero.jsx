@@ -4,8 +4,9 @@ import Partners from "./partners";
 
 const Hero = () => {
   return (
-    <div className="relative lg:h-[95vh] h-auto overflow-hidden bg-gray-900">
-      <div className="container mx-auto px-4 relative z-0 lg:mt-20">
+    <div className="lg:h-[95vh] h-[95vh]  relative bg-gray-900 lg-h-95vh">
+    <div className="contained">
+      <div className="container mx-auto px-4 relative z-0 lg:mt-10">
         <div className="flex flex-col md:flex-row items-center gap-4 py-24">
           <div className="md:w-1/2 mb-8 md:mb-0 md:text-left">
           <p className="text-sm md:text-lg font-bold text-gray-100 mb-4">
@@ -28,16 +29,17 @@ const Hero = () => {
               </button>
             </div>
           </div>
-          <div className="md:w-1/2 overflow-hidden rounded-lg shadow-lg">
+          <div className="md:w-1/2 overflow-hidden rounded-lg">
             <Image
               src="/images/webdev.png"
               alt="hero-image"
               className="object-cover object-center"
-              width={700}
+              width={800}
               height={500}
             />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
