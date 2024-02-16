@@ -1,3 +1,4 @@
+/* eslint-disabl no-unescape-entities */
 import React from "react";
 import Image from "next/image";
 import Partners from "./partners";

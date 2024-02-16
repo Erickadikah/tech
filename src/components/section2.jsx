@@ -1,3 +1,4 @@
+/* eslint-disabl no-unescape-entities */
 import React from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
