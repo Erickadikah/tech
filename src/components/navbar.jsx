@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import Link from "next/link";
+// import Link from "next/link";
+import { Link as ScrollLink } from "react-scroll";
 import { HiMenu, HiX } from "react-icons/hi";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Image from "next/image";
 import { GoArrowUpRight } from "react-icons/go";
+import Link from "next/link";
+import { LuArrowRight } from "react-icons/lu";
+
 
 const LandingNavBar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,8 +44,8 @@ const LandingNavBar = () => {
     <nav className="backdrop-blur-lg bg-white/30 w-full md:h-20 flex items-center justify-between px-8 md:px-14 sticky top-0 shadow-sm z-10">
       {/* Desktop Navigation (Centered) */}
       <ul className="hidden md:flex justify-center items-center gap-8 space-x-4 flex-grow">
-        {/*<div className="flex items-center">
-          <Link href="/">
+        <div className="flex items-center text-lg font-extrabold">
+          {/*<Link href="/">
             <Image
               src="/images/MWENDA ROYFORD LOGO-03 (1).png"
               alt="Logo"
@@ -49,45 +53,62 @@ const LandingNavBar = () => {
               height={40}
               width={80}
             />
-          </Link>
-  </div>*/}
+  </Link>*/}
+          
+  </div>
         <li>
-          <Link href="/" className="text-base text-gray-700 hover:underline">
+          <ScrollLink
+            to="features"
+            className="text-base text-gray-700 hover:underline"
+            smooth={true}
+            duration={300}
+          >
             Features
-          </Link>
+          </ScrollLink>
         </li>
         <li>
-          <Link
-            href="/Our-lawyer"
+          <ScrollLink
+            to="about"
             className="text-base text-gray-700 hover:underline"
+            smooth={true}
+            duration={500}
           >
             About Us
-          </Link>
+          </ScrollLink>
         </li>
         <li>
-          <Link
-            href="/Our-lawyer"
+          <ScrollLink
+            to="services"
             className="text-base text-gray-700 hover:underline"
+            smooth={true}
+            duration={500}
+            id="services"
           >
-            services
-          </Link>
+            Services
+          </ScrollLink>
         </li>
         <li>
-          <Link
-            href="/Our-lawyer"
+          <ScrollLink
+            to="faq"
             className="text-base text-gray-700 hover:underline"
+            smooth={true}
+            duration={500}
+            id="FAQ"
           >
             FAQ?
-          </Link>
+          </ScrollLink>
         </li>
         <li>
-          <Link
-            href="/contact"
+          <ScrollLink
+            to="testimonials"
             className="text-base text-gray-700 hover:underline flex"
+            smooth={true}
+            duration={500}
+            id="Testimonials"
           >
-            Contact
+           Testimonials
             <GoArrowUpRight size={20} className="ml-2" />
-          </Link>
+          </ScrollLink>
         </li>
         <a
         target="_blank"
@@ -95,9 +116,10 @@ const LandingNavBar = () => {
         href="https://hostmasterskenya.com:2096/"
         >
           <button
-            className="px-6 bg-[#2563EB] py-2 text-base lg:text-lg xl:text-lg text-white border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-yellow-600 focus:outline-none rounded-xl focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center"
+            className="px-10 bg-blue-500 py-2 text-base lg:text-lg xl:text-lg text-white border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-yellow-600 focus:outline-none rounded-xl focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center"
           >
             Get Started
+            <LuArrowRight size={20} className="ml-2" />
           </button>
         </a>
       </ul>
@@ -115,10 +137,10 @@ const LandingNavBar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 flex flex-col p-8 bg-gray-300">
+        <div class="md:hidden fixed inset-0 flex flex-col p-8 bg-[#F3F5F8] w-full">
           {/* ... mobile navigation links ... */}
-          <ul className="space-y-5">
-            <li className="border-b w-full">
+          <ul className="space-y-5 backdrop-blur-2xl bg-white/30 w-full">
+            <li className="border-b">
               <Link href="/" onClick={toggleMobileMenu}>
                 Home
               </Link>
@@ -212,18 +234,7 @@ const LandingNavBar = () => {
                 </button>
               </Link>
             </li>
-            <li className="border-b w-full">
-              <Link href="/">
-                <button
-                  className="px-4  mb-4 py-2 text-base text-white border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-yellow-600 focus:outline-none rounded-full focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center lg:rounded-full xl:rounded-full"
-                  style={{
-                    background: "rgb(208,178,22)",
-                  }}
-                >
-                  LogIn
-                </button>
-              </Link>
-            </li>
+            
           </ul>
           <div className="flex items-center">
             <button

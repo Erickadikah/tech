@@ -6,7 +6,7 @@ import Section2 from "../components/section2"
 import Foot from "../components/foot"
 import Section3 from "../components/section3"
 import Faq from "../components/faq"
-
+import Testimonials from "../components/testimonial";
 
 export default function Home() {
   return (
@@ -14,8 +14,9 @@ export default function Home() {
     <LandingNavBar />
     <Hero />
     <Section3 />
-    <Section1 />
-    <Section2 />
+    <Testimonials />
+    {/*<Section1 />*/}
+    {/*<Section2 />*/}
     <Faq />
     <Foot />
     </main>

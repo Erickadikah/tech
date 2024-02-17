@@ -5,12 +5,12 @@ import Partners from "./partners";
 
 const Section1 = () => {
   return (
-    <div className="w-full bg-gray-900 min-h-screen p-2 " id="services">
+    <div className="w-full bg-[#F5F3EA] min-h-screen p-2 " id="services">
       <div className="container mx-auto mt-20 justify-center">
-      <p className="text-sm text-center md:text-lg font-bold text-gray-100 mb-4">
+      <p className="text-sm text-center md:text-lg font-bold text-gray-900 mb-4">
                 Services
               </p>
-        <h1 className="text-center text-2xl md:text-5xl font-bold text-white mb-12">
+        <h1 className="text-center text-2xl md:text-5xl font-bold text-gray-900 mb-12">
           Fueling Business Success with
           <br />
            Cutting-Edge Technology
