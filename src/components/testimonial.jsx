@@ -57,7 +57,7 @@ Thanks to their expertise and dedication, we now have a website that not only me
             {name}
           </div>
           <p className="text-blue-500 mt-2">{position}</p>
-          <p className="text-gray-900 mb-2">{review}</p>
+          <p className="text-gray-900 lg:text-lg text-sm mb-2">{review}</p>
           <div className="flex items-center mb-2 mt-4">
             {[...Array(5)].map((_, index) => (
               <MdOutlineStarPurple500

@@ -70,9 +70,9 @@ const Section3 = () => {
           </div>
         ))}
       </div>
-      <div className="container mx-auto px-8 mb-10">
+      {/*<div className="container px-8 mb-10">
         <h1 className="lg:text-4xl text-2xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4 lg:mb-8 lg:mt-10">
-          COMPLETE BROADCASTING SOLUTIONS
+          COMPLETE DIGITAL SOLUTIONS
         </h1>
         <p className="lg:text-lg text-sm text-gray-700 mb-4 lg:mb-10 max-w-screen-md ">
           Unlike traditional marketing, digital marketing allows you to target
@@ -80,16 +80,75 @@ const Section3 = () => {
           services, including custom website development, web design, e-commerce
           solutions, content management systems (CMS), and website maintenance.
         </p>
-        <div className="flex gap-4">
-          <button className="px-6 md:px-6 py-3 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none rounded-full">
-            Request a quote
-          </button>
-          <button className="px-6 md:px-6 py-3 border border-blue-500 text-blue-500 hover:bg-blue-600 hover:text-white focus:outline-none rounded-full">
-            Contact sales
-          </button>
-          {/*Software services we offer */}
+        <div className="flex flex-wrap gap-4">
+          {/* Social Media Marketing Card *
+          <div className="max-w-xs rounded overflow-hidden shadow-lg bg-white">
+            <img
+              className="w-full"
+              src="/images/social-media-marketing.jpg"
+              alt="Social Media Marketing"
+            />
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2">
+                Social Media Marketing
+              </div>
+              <p className="text-gray-700 text-base">
+                Enhance your brand's presence on social media platforms and
+                engage with your audience effectively.
+              </p>
+            </div>
+            <div className="px-6 py-4">
+              <button className="w-full px-6 py-3 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none rounded-full">
+                Learn More
+              </button>
+            </div>
+          </div>
+
+          {/* Pay-Per-Click Advertising Card 
+          <div className="max-w-xs rounded overflow-hidden shadow-lg bg-white">
+            <img
+              className="w-full"
+              src="/images/2-6.png"
+              alt="Pay-Per-Click Advertising"
+            />
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2">
+                Pay-Per-Click Advertising
+              </div>
+              <p className="text-gray-700 text-base">
+                Drive targeted traffic to your website through paid advertising
+                campaigns, maximizing your ROI.
+              </p>
+            </div>
+            <div className="px-6 py-4">
+              <button className="w-full px-6 py-3 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none rounded-full">
+                Learn More
+              </button>
+            </div>
+          </div>
+
+          {/* Email Marketing Card 
+          <div className="max-w-xs rounded overflow-hidden shadow-lg bg-white">
+            <img
+              className="w-full"
+              src="/images/email-marketing.jpg"
+              alt="Email Marketing"
+            />
+            <div className="px-6 py-4">
+              <div className="font-bold text-xl mb-2">Email Marketing</div>
+              <p className="text-gray-700 text-base">
+                Reach your target audience directly through personalized email
+                campaigns and increase conversions.
+              </p>
+            </div>
+            <div className="px-6 py-4">
+              <button className="w-full px-6 py-3 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none rounded-full">
+                Learn More
+              </button>
+            </div>
+          </div>
         </div>
-        </div>
+          </div>*/}
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Partners from "./partners";
 
 const Hero = () => {
   return (
-    <div className="lg:h-[95vh] h-[60vh]  relative bg-[#F3F5F8]">
+    <div className="lg:h-[95vh] h-[65vh]  relative bg-[#F3F5F8]">
       <div className="">
         <div className="container mx-auto px-8 relative z-0 ">
           <div className="flex flex-col md:flex-row items-center gap-4 lg:py-18 py-10">
@@ -22,10 +22,10 @@ const Hero = () => {
                 to AI and IoT, we've got you covered.
               </p>
               <div className="flex gap-4">
-                <button className="px-6 md:px-6 py-3 bg-blue-500 text-white hover:bg-blue-600 focus:outline-none rounded-full">
+                <button className="px-3 md:px-6 py-2 text-sm bg-blue-500 text-white hover:bg-blue-600 focus:outline-none rounded-full">
                   Get Started
                 </button>
-                <button className="px-6 md:px-6 py-3 border border-blue-500 text-blue-500 hover:bg-blue-600 hover:text-white focus:outline-none rounded-full">
+                <button className="px-3 md:px-6 py-2 text-sm border border-blue-500 text-blue-500 hover:bg-blue-600 hover:text-white focus:outline-none rounded-full">
                   Request Service
                 </button>
               </div>
