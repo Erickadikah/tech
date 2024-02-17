@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import Testimonial from "./testimonial";
+// import Testimonial from "./testimonial";
+import SoftwareRequestForm from "./SoftwareRequestForm";
+import { IoCloseCircle } from "react-icons/io5";
 
 const features = [
   {
@@ -27,6 +29,12 @@ const features = [
 ];
 
 const Section3 = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
+
   return (
     <div
       className="flex flex-col items-center justify-center min-h-screen bg-[#F3F5F8]"
@@ -40,6 +48,17 @@ const Section3 = () => {
           Our digital marketing agency offers a variety of services to help
           businesses establish a strong online presence.
         </p>
+        <div className="flex gap-6 lg:justify-center">
+                <button 
+                className="px-3 lg:px-14 lg:py-3 py-2 lg:text-md text-sm bg-blue-500 text-white hover:bg-blue-600 hover:shadow-2xl focus:outline-none rounded-full"
+                onClick={toggleForm}
+                >
+                  Contact sales
+                </button>
+                <button className="px-3 lg:px-14 lg:py-3 py-2 lg:text-md text-sm border border-blue-500 text-blue-500 hover:shadow-2xl hover:bg-blue-600 hover:text-white focus:outline-none rounded-full">
+                  Request Demo
+                </button>
+              </div>
         {features.map((feature, index) => (
           <div
             key={feature.id}
@@ -67,9 +86,23 @@ const Section3 = () => {
                 height={400}
               />
             </div>
+            
           </div>
         ))}
       </div>
+      {showForm && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-20 flex items-center justify-center">
+          <div className="relative z-30">
+            <SoftwareRequestForm />
+            <button
+              onClick={toggleForm}
+              className="absolute top-4 right-4 text-white hover:text-gray-300 mb-12"
+            >
+              <IoCloseCircle className="w-8 h-8 text-gray-500" />
+            </button>
+          </div>
+        </div>
+      )}
       {/*<div className="container px-8 mb-10">
         <h1 className="lg:text-4xl text-2xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4 lg:mb-8 lg:mt-10">
           COMPLETE DIGITAL SOLUTIONS

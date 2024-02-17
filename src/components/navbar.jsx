@@ -68,7 +68,7 @@ const LandingNavBar = () => {
         </li>
         <li>
           <ScrollLink
-            to="about"
+            to="hero"
             className="text-base text-gray-700 hover:underline"
             smooth={true}
             duration={500}
