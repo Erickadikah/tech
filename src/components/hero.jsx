@@ -16,16 +16,16 @@ const Hero = () => {
               <h1 className="text-4xl md:text-7xl font-bold text-blue-500 leading-tight mb-6">
                 Empowering Businesses with Tech Solutions
               </h1>
-              <p className="text-lg text-gray-900 mb-8">
+              <p className="text-sm lg:text-lg text-gray-900 mb-8">
                 We specialize in crafting technology solutions that drive
                 business growth and innovation. From web and mobile applications
                 to AI and IoT, we've got you covered.
               </p>
               <div className="flex gap-4">
-                <button className="px-3 md:px-6 py-2 text-sm bg-blue-500 text-white hover:bg-blue-600 focus:outline-none rounded-full">
+                <button className="px-3 lg:px-10 lg:py-2 py-2 lg:text-md text-sm bg-blue-500 text-white hover:bg-blue-600 focus:outline-none rounded-full">
                   Get Started
                 </button>
-                <button className="px-3 md:px-6 py-2 text-sm border border-blue-500 text-blue-500 hover:bg-blue-600 hover:text-white focus:outline-none rounded-full">
+                <button className="px-3 lg:px-8 lg:py-6 py-2 lg:text-md text-sm border border-blue-500 text-blue-500 hover:bg-blue-600 hover:text-white focus:outline-none rounded-full">
                   Request Service
                 </button>
               </div>

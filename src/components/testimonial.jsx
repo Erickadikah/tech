@@ -57,7 +57,7 @@ Thanks to their expertise and dedication, we now have a website that not only me
             {name}
           </div>
           <p className="text-blue-500 mt-2">{position}</p>
-          <p className="text-gray-900 lg:text-lg text-sm mb-2">{review}</p>
+          <p className="text-gray-900 lg:text-md text-sm mb-2">{review}</p>
           <div className="flex items-center mb-2 mt-4">
             {[...Array(5)].map((_, index) => (
               <MdOutlineStarPurple500
@@ -76,7 +76,7 @@ Thanks to their expertise and dedication, we now have a website that not only me
   // Render Testimonials
   return (
     <div
-      className="flex flex-col items-center justify-center h-auto lg:h-[70vh] bg-[#F3F5F8]"
+      className="flex flex-col items-center justify-center h-auto lg:h-[85vh] bg-[#F3F5F8]"
       id="testimonials"
     >
       <div className="container p-4 lg:mt-10">

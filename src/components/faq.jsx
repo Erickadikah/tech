@@ -25,7 +25,7 @@ const Faq = () => {
     <section className="py-8 bg-[#F3F5F8] sm:py-16 lg:py-18 " id="faq">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-2xl leading-tight text-black sm:text-4xl lg:text-5xl font-bold">
+          <p className="text-2xl leading-tight text-black sm:text-4xl lg:text-5xl font-bold lg:mt-10">
             Got questions about our <span className="text-black">services?</span>
           </p>
           <p className="mt-4 tex-sm lg:text-xl text-gray-600 font-thin">
