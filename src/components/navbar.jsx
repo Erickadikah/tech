@@ -45,16 +45,6 @@ const LandingNavBar = () => {
       {/* Desktop Navigation (Centered) */}
       <ul className="hidden md:flex justify-center items-center gap-8 space-x-4 flex-grow">
         <div className="flex items-center text-lg font-extrabold">
-          {/*<Link href="/">
-            <Image
-              src="/images/MWENDA ROYFORD LOGO-03 (1).png"
-              alt="Logo"
-              className="cursor-pointer"
-              height={40}
-              width={80}
-            />
-  </Link>*/}
-          
   </div>
         <li>
           <ScrollLink
@@ -82,7 +72,7 @@ const LandingNavBar = () => {
             className="text-base text-gray-700 hover:underline"
             smooth={true}
             duration={500}
-            id="services"
+            id="Services"
           >
             Services
           </ScrollLink>
@@ -116,7 +106,7 @@ const LandingNavBar = () => {
         href="https://hostmasterskenya.com:2096/"
         >
           <button
-            className="px-10 bg-blue-500 py-2 text-base lg:text-lg xl:text-lg text-white border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-yellow-600 focus:outline-none rounded-xl focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center"
+            className="px-10 bg-blue-500 py-2 text-base lg:text-lg xl:text-lg text-white border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-yellow-600 focus:outline-none rounded-full focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center"
           >
             Get Started
             <LuArrowRight size={20} className="ml-2" />
