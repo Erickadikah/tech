@@ -137,7 +137,7 @@ const Faq = () => {
               style={{ display: "none" }}
               className="px-4 pb-5 sm:px-6 sm:pb-6"
             >
-              <p className="text-xs lg:text-lg">
+              <p className="text-xs lg:text-lg text-black">
                We utilize a variety of technologies based on project requirements. Our expertise includes HTML, CSS, JavaScript, React, Angular, Vue.js, Node.js and more
               </p>
             </div>
@@ -173,7 +173,7 @@ const Faq = () => {
               style={{ display: "none" }}
               className="px-4 pb-5 sm:px-6 sm:pb-6"
             >
-              <p className="text-xs lg:text-lg">
+              <p className="text-xs lg:text-lg text-black">
                 Yes, we specialize in developing e-commerce websites using platforms like WooCommerce, Shopify, Magento, and custom solutions tailored to your business needs.
               </p>
             </div>

@@ -81,7 +81,7 @@ const Section3 = () => {
               <Image
                 src={feature.imageUrl}
                 alt="feature-image"
-                className="object-cover object-center rounded-lg shadow-xl"
+                className="object-cover object-center rounded-lg shadow-xl "
                 width={600}
                 height={400}
               />
