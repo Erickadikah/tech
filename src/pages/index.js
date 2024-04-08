@@ -15,7 +15,7 @@ export default function Home() {
     <LandingNavBar />
     <Hero />
     <Section3 />
-    <Services />
+    {/*<Services />*/}
     <Testimonials />
     {/*<Section1 />*/}
     {/*<Section2 />*/}

@@ -40,7 +40,7 @@ const Section3 = () => {
       className="flex flex-col items-center justify-center min-h-screen bg-[#F3F5F8]"
       id="features"
     >
-      <div className="container mx-auto lg:px-8 px-4 mb-10">
+      <div className="container mx-auto lg:px-8 px-4 mb-10 mt-20">
         <h1 className="lg:text-4xl text-2xl md:text-5xl font-extrabold text-gray-900 leading-tight lg:text-center mb-4 lg:mb-8">
           GET YOUR BUSINESS ONLINE
         </h1>
@@ -49,20 +49,20 @@ const Section3 = () => {
           businesses establish a strong online presence.
         </p>
         <div className="flex gap-6 lg:justify-center">
-                <button 
-                className="px-3 lg:px-14 lg:py-3 py-2 lg:text-md text-sm bg-blue-500 text-white hover:bg-blue-600 hover:shadow-2xl focus:outline-none rounded-full"
+                <button
+                className="px-3 lg:px-14 lg:py-3 py-2 lg:text-md text-xs bg-blue-500 text-white hover:bg-blue-600 hover:shadow-2xl focus:outline-none rounded-full shadow-xl"
                 onClick={toggleForm}
                 >
                   Contact sales
                 </button>
-                <button className="px-3 lg:px-14 lg:py-3 py-2 lg:text-md text-sm border border-blue-500 text-blue-500 hover:shadow-2xl hover:bg-blue-600 hover:text-white focus:outline-none rounded-full">
+                <button className="px-3 lg:px-14 lg:py-3 py-2 lg:text-md text-xs border border-blue-500 text-blue-500 hover:shadow-2xl hover:bg-blue-600 hover:text-white focus:outline-none rounded-full shadow-xl">
                   Request Demo
                 </button>
               </div>
         {features.map((feature, index) => (
           <div
             key={feature.id}
-            className={`flex flex-col md:flex-row items-center lg:gap-8 gap-4 mt-10 ${
+            className={`flex flex-col md:flex-row items-center lg:gap-16 gap-4 lg:mt-20 mt-10 ${
               index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
             }`}
             data-aos-duration="1000"
@@ -70,7 +70,7 @@ const Section3 = () => {
             data-aos-delay="300"
           >
             <div className="md:w-1/2">
-              <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight mb-4">
+              <h1 className="text-2xl md:text-2xl font-extrabold text-gray-900 leading-tight mb-4">
                 {feature.title}
               </h1>
               <p className="text-sm lg:text-lg text-gray-700 mb-4 lg:mt-10">
@@ -81,7 +81,7 @@ const Section3 = () => {
               <Image
                 src={feature.imageUrl}
                 alt="feature-image"
-                className="object-cover object-center"
+                className="object-cover object-center rounded-lg shadow-xl"
                 width={600}
                 height={400}
               />
@@ -103,7 +103,6 @@ const Section3 = () => {
           </div>
         </div>
       )}
-      {/**/}
     </div>
   );
 };

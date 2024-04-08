@@ -68,7 +68,7 @@ const LandingNavBar = () => {
         </li>
         <li>
           <ScrollLink
-            to="services"
+            to="features"
             className="text-base text-gray-700 hover:underline"
             smooth={true}
             duration={500}
@@ -103,7 +103,7 @@ const LandingNavBar = () => {
         <a
         target="_blank"
         rel="noreferrer"
-        href="https://hostmasterskenya.com:2096/"
+        href="#"
         >
           <button
             className="px-10 bg-blue-500 py-2 text-base lg:text-lg xl:text-lg text-white border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-yellow-600 focus:outline-none rounded-full focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center"
