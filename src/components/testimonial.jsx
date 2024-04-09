@@ -44,30 +44,34 @@ Thanks to their expertise and dedication, we now have a website that not only me
   // Testimonial component
   const Testimonial = ({ name, image, review, helpfulCount, position }) => {
     return (
-      <div className="max-w-lg mx-auto overflow-hidden">
-        <Image
-          className="w-14 h-14 rounded-full ml-5"
-          width={100}
-          height={100}
-          src={image}
-          alt={name}
-        />
-        <div className="p-6">
-          <div className="font-semibold lg:text-xl text-lg text-gray-800 mb-2">
-            {name}
-          </div>
-          <p className="text-blue-500 mt-2">{position}</p>
-          <p className="text-gray-900 lg:text-md text-sm mb-2">{review}</p>
-          <div className="flex items-center mb-2 mt-4">
-            {[...Array(5)].map((_, index) => (
-              <MdOutlineStarPurple500
-                key={index}
-                className={`w-6 h-6 ${
-                  index < helpfulCount ? "text-yellow-500" : "text-gray-300"
-                }`}
+      <div className="max-w-lg mx-auto overflow-hidden bg-white shadow-md rounded-lg">
+        <div className="p-4 md:p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <Image
+                className="w-14 h-14 rounded-full ml-5 md:ml-0 md:mr-4"
+                width={100}
+                height={100}
+                src={image}
+                alt={name}
               />
-            ))}
+              <div className="font-semibold lg:text-xl text-lg text-gray-800 mt-2">
+                {name}
+              </div>
+              <p className="text-blue-500 mt-1">{position}</p>
+            </div>
+            <div className="flex items-center">
+              {[...Array(5)].map((_, index) => (
+                <MdOutlineStarPurple500
+                  key={index}
+                  className={`w-6 h-6 ${
+                    index < helpfulCount ? "text-yellow-500" : "text-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
+          <p className="text-gray-900 lg:text-md text-sm mt-4">{review}</p>
         </div>
       </div>
     );
@@ -76,21 +80,21 @@ Thanks to their expertise and dedication, we now have a website that not only me
   // Render Testimonials
   return (
     <div
-      className="flex flex-col items-center justify-center h-auto lg:h-[85vh] bg-[#F3F5F8]"
+      className="flex flex-col items-center justify-center min-h-screen bg-[#F3F5F8] py-12"
       id="testimonials"
     >
-      <div className="container p-4 lg:mt-10">
-        <h1 className="lg:text-4xl text-2xl md:text-5xl font-extrabold text-gray-900 leading-tight pl-0 lg:mb-8 lg:mt-20">
+      <div className="container px-4">
+        <h1 className="lg:text-4xl text-2xl md:text-5xl font-extrabold text-gray-900 leading-tight pl-0 mb-8 text-center">
           WHAT OUR CLIENTS SAY ABOUT
           <br />
           OUR SERVICES
         </h1>
-        <p className="lg:text-lg text-sm mt-4 text-gray-700 mb-4 lg:mb-10 max-w-screen-md ">
+        <p className="lg:text-lg text-sm mt-4 text-gray-700 mb-10 text-center">
           We take pride in delivering real results to our clients. Read what our
           clients have to say about our digital marketing services.
         </p>
       </div>
-      <div className="container flex flex-col md:flex-row items-center gap-4 mt-10">
+      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {testimonialData.map((testimonial, index) => (
           <Testimonial key={index} {...testimonial} />
         ))}

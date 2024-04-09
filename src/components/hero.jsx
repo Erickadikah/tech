@@ -56,7 +56,7 @@ const Hero = () => {
                 </button>
               </div>
             </div>
-            <div className="md:w-1/2 overflow-hidden rounded-full">
+            <div className="md:w-1/2 overflow-hidden ">
               <Image
                 src="/images/tech.png"
                 alt="hero-image"
