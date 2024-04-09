@@ -1,6 +1,8 @@
-import React from "react";
+"use_client";
+import React, { useEffect, useState } from "react";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import Image from "next/image";
+import Cookies from "js-cookie";
 
 const Testimonials = () => {
   // Testimonial data array
@@ -13,9 +15,8 @@ const Testimonials = () => {
       joinedDate: "2021-08-01",
       reviewDate: "2021-08-01",
       review:
-        "I had the pleasure of working with this team to create a stunning website for my law firm, Royfordlaw. From start to finish, the experience was nothing short of amazing. attention to detail, creativity, and technical expertise truly exceeded my expectations.\
-Not only did they deliver a website that perfectly captured the essence of my firm.",
-      helpfulCount: 5,
+        "I had the pleasure of working with this team to create a stunning website for my law firm, Royfordlaw. From start to finish, the experience was nothing short of amazing. attention to detail, creativity, and technical expertise truly exceeded my expectations. Not only did they deliver a website that perfectly captured the essence of my firm.",
+      helpfulCount: 1,
     },
     {
       id: 2,
@@ -24,8 +25,7 @@ Not only did they deliver a website that perfectly captured the essence of my fi
       image: "/images/avatar.png",
       reviewDate: "2021-08-01",
       review:
-        "As the Manager at Acuitus Consultancy, I had the pleasure of collaborating with, On the development of our company website, and I must say, the experience was outstanding.\
-they demonstrated exceptional skill and professionalism throughout the entire process. From understanding our specific needs to implementing innovative solutions, they exceeded our expectations at every turn.",
+        "As the Manager at Acuitus Consultancy, I had the pleasure of collaborating with, On the development of our company website, and I must say, the experience was outstanding. they demonstrated exceptional skill and professionalism throughout the entire process. From understanding our specific needs to implementing innovative solutions, they exceeded our expectations at every turn.",
       helpfulCount: 5,
     },
     {
@@ -35,14 +35,66 @@ they demonstrated exceptional skill and professionalism throughout the entire pr
       image: "/images/avatar.png",
       reviewDate: "2021-08-01",
       review:
-        "They crafted for us is not only visually stunning but also highly functional and user-friendly. It perfectly captures the essence of our consultancy and showcases our services in the best possible light.\
-Thanks to their expertise and dedication, we now have a website that not only meets but exceeds our goals. I couldn't be happier with the outcome and would highly recommend them to anyone seeking top-notch web development services.",
+        "They crafted for us is not only visually stunning but also highly functional and user-friendly. It perfectly captures the essence of our consultancy and showcases our services in the best possible light. Thanks to their expertise and dedication, we now have a website that not only meets but exceeds our goals. I couldn't be happier with the outcome and would highly recommend them to anyone seeking top-notch web development services.",
       helpfulCount: 4,
     },
   ];
 
+  // State to track if the user has already given a helpful count
+  const [givenHelpful, setGivenHelpful] = useState({});
+
+  // Function to handle setting helpful count and cookie
+  const handleHelpfulCount = (testimonialId) => {
+    // Check if the user has already given a helpful count
+    if (!givenHelpful[testimonialId]) {
+      // Update the helpful count in state
+      setGivenHelpful((prevState) => ({
+        ...prevState,
+        [testimonialId]: true,
+      }));
+      // Update the helpful count in cookies
+      Cookies.set(`testimonial_${testimonialId}`, true, { expires: 7 }); // Cookie expires in 7 days
+    }
+  };
+
+  // Function to check if user has already given a helpful count for a testimonial
+  const hasGivenHelpful = (testimonialId) => {
+    return (
+      givenHelpful[testimonialId] || Cookies.get(`testimonial_${testimonialId}`)
+    );
+  };
+
   // Testimonial component
-  const Testimonial = ({ name, image, review, helpfulCount, position }) => {
+  const Testimonial = ({ id, name, image, review, helpfulCount, position }) => {
+    // State to track the count of helpful votes
+    const [helpfulVoteCount, setHelpfulVoteCount] = useState(helpfulCount);
+
+    // Function to handle setting helpful count and cookie
+    const handleHelpfulCount = (testimonialId) => {
+      // Check if the user has already given a helpful count
+      if (!givenHelpful[testimonialId]) {
+        // Update the helpful count in state
+        setGivenHelpful((prevState) => ({
+          ...prevState,
+          [testimonialId]: true,
+        }));
+
+        // Update the helpful count in cookies
+        Cookies.set(`testimonial_${testimonialId}`, true, { expires: 7 }); // Cookie expires in 7 days
+
+        // Update the count of helpful votes
+        setHelpfulVoteCount((prevCount) => prevCount + 1);
+      }
+    };
+
+    // Function to check if user has already given a helpful count for a testimonial
+    const hasGivenHelpful = (testimonialId) => {
+      return (
+        givenHelpful[testimonialId] ||
+        Cookies.get(`testimonial_${testimonialId}`)
+      );
+    };
+
     return (
       <div className="max-w-lg mx-auto overflow-hidden bg-white shadow-md rounded-lg">
         <div className="p-4 md:p-6">
@@ -58,7 +110,7 @@ Thanks to their expertise and dedication, we now have a website that not only me
               <div className="font-semibold lg:text-xl text-lg text-gray-800 mt-2">
                 {name}
               </div>
-              <p className="text-blue-500 mt-1">{position}</p>
+              <div className="text-blue-500 mt-1">{position}</div>
             </div>
             <div className="flex items-center">
               {[...Array(5)].map((_, index) => (
@@ -71,33 +123,37 @@ Thanks to their expertise and dedication, we now have a website that not only me
               ))}
             </div>
           </div>
-          <p className="text-gray-900 lg:text-md text-sm mt-4">{review}</p>
+          <div className="text-gray-900 lg:text-md text-sm mt-4">{review}</div>
+          <div className="flex items-center mt-4">
+            <button
+              className={`bg-blue-500 text-white px-4 py-2 rounded-lg mr-4 ${
+                hasGivenHelpful(id) ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={() => handleHelpfulCount(id)} // This function is called only when the button is clicked
+              disabled={hasGivenHelpful(id)}
+            >
+              {hasGivenHelpful(id) ? "Helpful ✓" : "Helpful"}
+            </button>
+            <span className="text-gray-500">
+              ({helpfulVoteCount} people found this helpful)
+            </span>
+          </div>
         </div>
       </div>
     );
   };
 
-  // Render Testimonials
   return (
-    <div
-      className="flex flex-col items-center justify-center min-h-screen bg-[#F3F5F8] py-12"
-      id="testimonials"
-    >
-      <div className="container px-4">
-        <h1 className="lg:text-4xl text-2xl md:text-5xl font-extrabold text-gray-900 leading-tight pl-0 mb-8 text-center">
-          WHAT OUR CLIENTS SAY ABOUT
-          <br />
-          OUR SERVICES
-        </h1>
-        <p className="lg:text-lg text-sm mt-4 text-gray-700 mb-10 text-center">
-          We take pride in delivering real results to our clients. Read what our
-          clients have to say about our digital marketing services.
-        </p>
-      </div>
-      <div className="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {testimonialData.map((testimonial, index) => (
-          <Testimonial key={index} {...testimonial} />
-        ))}
+    <div className="bg-gray-100 py-12">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">
+          Testimonials
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {testimonialData.map((testimonial) => (
+            <Testimonial key={testimonial.id} {...testimonial} />
+          ))}
+        </div>
       </div>
     </div>
   );
