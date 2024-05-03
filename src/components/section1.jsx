@@ -7,13 +7,13 @@ const Section1 = () => {
   return (
     <div className="w-full bg-[#F5F3EA] min-h-screen p-2 " id="services">
       <div className="container mx-auto mt-20 justify-center">
-      <p className="text-sm text-center md:text-lg font-bold text-gray-900 mb-4">
-                Services
-              </p>
+        <p className="text-sm text-center md:text-lg font-bold text-gray-900 mb-4">
+          Services
+        </p>
         <h1 className="text-center text-2xl md:text-5xl font-bold text-gray-900 mb-12">
           Fueling Business Success with
           <br />
-           Cutting-Edge Technology
+          Cutting-Edge Technology
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
           <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center">
@@ -54,7 +54,6 @@ const Section1 = () => {
           </div>
           <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center">
             <div className="mb-6">
-             
               <Image
                 src="/images/16.svg"
                 alt=""
@@ -91,7 +90,7 @@ const Section1 = () => {
           </div>
           <div className="bg-gray-800 rounded-lg p-6 flex flex-col items-center">
             <div className="mb-6">
-               <Image
+              <Image
                 src="/images/3-6.png"
                 alt=""
                 width={100}
@@ -109,7 +108,7 @@ const Section1 = () => {
           </div>
         </div>
       </div>
-    {/*<div className="mt-10">
+      {/*<div className="mt-10">
     <Partners />
   </div>*/}
     </div>

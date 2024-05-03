@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from "react";
-import Image from "next/image";
+import Image from "next/image"; // Importing Next.js Image component for optimized image rendering
 import Partners from "./partners";
 import SoftwareRequestForm from "./SoftwareRequestForm";
-import { IoCloseCircle } from "react-icons/io5";
-import { Link as ScrollLink } from "react-scroll";
-import { LuArrowDownCircle } from "react-icons/lu";
+import { IoCloseCircle } from "react-icons/io5"; // Importing close icon from react-icons/io5
+import { Link as ScrollLink } from "react-scroll"; // Importing ScrollLink component from react-scroll
+import { LuArrowDownCircle } from "react-icons/lu"; // Importing down arrow icon from react-icons/lu
 
 const Hero = () => {
   const [showForm, setShowForm] = useState(false);
@@ -18,13 +18,13 @@ const Hero = () => {
     <div
       className="lg:h-[95vh] h-[85vh] sm:h-[40vh] relative"
       id="hero"
-      style={{ backgroundImage: 'url("/images/ideas.jpg")' ,
-      objectFit: 'cover',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-
-    }}
+      style={{ 
+        backgroundImage: 'url("/images/ideas.jpg")', // Background image URL
+        objectFit: 'cover', // Ensure the image covers the container
+        backgroundSize: 'cover', // Make sure the background image covers the entire container
+        backgroundPosition: 'center', // Center the background image
+        backgroundRepeat: 'no-repeat', // Don't repeat the background image
+      }}
     >
       <div className="absolute inset-0 bg-[#11021F] opacity-90"></div>
       <div className="">
@@ -58,20 +58,22 @@ const Hero = () => {
             </div>
             <div className="md:w-1/2 overflow-hidden ">
               <Image
-                src="/images/tech.png"
+                src="/images/tech.png" // Image source URL
                 alt="hero-image"
                 className=" md:block object-cover object-center"
-                width={1000}
-                height={200}
+                width={1000} // Image width
+                height={200} // Image height
               />
             </div>
           </div>
         </div>
       </div>
+      {/* Display the software request form when showForm is true */}
       {showForm && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-20 flex items-center justify-center">
           <div className="relative z-30">
             <SoftwareRequestForm />
+            {/* Close button for the form */}
             <button
               onClick={toggleForm}
               className="absolute top-4 right-4 text-white hover:text-gray-300 mb-12"
@@ -81,20 +83,20 @@ const Hero = () => {
           </div>
         </div>
       )}
+      {/* Scroll to the "features" section */}
       <ScrollLink
-          to="features"
-          spy={true}
-          smooth={true}
-          offset={-70}
-          duration={500}
-          className="absolute bottom-0 left-0 flex gap-4 justify-center items-center p-4 lg:p-16"
-        >
-          <LuArrowDownCircle className="text-2xl lg:text-3xl text-white animate-bounce" />
-          <h1 className="text-white text-sm lg:text-xl leading-relaxed">See More</h1>
-        </ScrollLink>
+        to="features"
+        spy={true}
+        smooth={true}
+        offset={-70}
+        duration={500}
+        className="absolute bottom-0 left-0 flex gap-4 justify-center items-center p-4 lg:p-16"
+      >
+        <LuArrowDownCircle className="text-2xl lg:text-3xl text-white animate-bounce" />
+        <h1 className="text-white text-sm lg:text-xl leading-relaxed">See More</h1>
+      </ScrollLink>
     </div>
   );
 };
 
 export default Hero;
-

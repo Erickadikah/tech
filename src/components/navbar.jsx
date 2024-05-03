@@ -1,23 +1,18 @@
-import React, { useState } from "react";
-// import Link from "next/link";
+import React, { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { HiMenu, HiX } from "react-icons/hi";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import Image from "next/image";
 import { GoArrowUpRight } from "react-icons/go";
+import { IoLogInOutline } from "react-icons/io5";
 import Link from "next/link";
-import { LuArrowRight } from "react-icons/lu";
-
 
 const LandingNavBar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollNav, setScrollNav] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [expertiseDropdownOpen, setExpertiseDropdownOpen] = useState(false);
   const [publicationDropdownOpen, setPublicationDropdownOpen] = useState(false);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
 
   const toggleAboutDropdown = () => {
     setAboutDropdownOpen(!aboutDropdownOpen);
@@ -40,18 +35,38 @@ const LandingNavBar = () => {
     }
   };
 
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setScrollNav(true);
+    } else {
+      setScrollNav(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  
+
   return (
-    <nav className="backdrop-blur-lg bg-white/30 w-full md:h-20 flex items-center justify-between px-8 md:px-14 sticky top-0 shadow-sm z-10">
+    <nav className={`${scrollNav ? 'backdrop-blur-xl text-white bg-white/30' : 'text-white bg-[#11021F] opacity-90'} w-full md:h-20 flex items-center justify-between px-8 md:px-14 sticky top-0 shadow-sm z-10`}>
       {/* Desktop Navigation (Centered) */}
       <ul className="hidden md:flex justify-center items-center gap-8 space-x-4 flex-grow">
-        <div className="flex items-center text-lg font-extrabold">
-  </div>
         <li>
           <ScrollLink
             to="features"
-            className="text-base text-gray-700 hover:underline"
             smooth={true}
             duration={300}
+            className={`first-line:text-base cursor-pointer ${scrollNav ? 'text-black' : 'text-white'}`}
           >
             Features
           </ScrollLink>
@@ -59,31 +74,29 @@ const LandingNavBar = () => {
         <li>
           <ScrollLink
             to="hero"
-            className="text-base text-gray-700 hover:underline"
             smooth={true}
             duration={500}
+            className={`first-line:text-base cursor-pointer ${scrollNav ? 'text-black' : 'text-white'}`}
           >
             About Us
           </ScrollLink>
         </li>
-        <li>
+        {/*<li>
           <ScrollLink
-            to="features"
-            className="text-base text-gray-700 hover:underline"
+            to="services"
             smooth={true}
             duration={500}
-            id="Services"
+            className={`first-line:text-base cursor-pointer ${scrollNav ? 'text-black' : 'text-white'}`}
           >
             Services
           </ScrollLink>
-        </li>
+  </li>*/}
         <li>
           <ScrollLink
             to="faq"
-            className="text-base text-gray-700 hover:underline"
             smooth={true}
             duration={500}
-            id="FAQ"
+            className={`first-line:text-base cursor-pointer ${scrollNav ? 'text-black' : 'text-white'}`}
           >
             FAQ?
           </ScrollLink>
@@ -91,25 +104,25 @@ const LandingNavBar = () => {
         <li>
           <ScrollLink
             to="testimonials"
-            className="text-base text-gray-700 hover:underline flex"
             smooth={true}
             duration={500}
+            className={`first-line:text-base flex cursor-pointer ${scrollNav ? 'text-black' : 'text-white'}`}
             id="Testimonials"
           >
-           Testimonials
+            Testimonials
             <GoArrowUpRight size={20} className="ml-2" />
           </ScrollLink>
         </li>
         <a
-        target="_blank"
-        rel="noreferrer"
-        href="#"
+          target="_blank"
+          rel="noreferrer"
+          href="#"
         >
           <button
-            className="px-10 bg-blue-500 py-2 text-base lg:text-lg xl:text-lg text-white border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-yellow-600 focus:outline-none rounded-full focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center"
+            className={`first-line:text-base ${scrollNav ? 'text-black' : 'text-white'} px-6 border-2 border-blue-500 py-2 text-base lg:text-md xl:text-lg border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-blue-500 focus:outline-none rounded-sm focus:bg-yellow-600 transform hover:scale-100 transition-transform flex items-center`}
           >
             Get Started
-            <LuArrowRight size={20} className="ml-2" />
+            <IoLogInOutline size={30} className="ml-2" />
           </button>
         </a>
       </ul>
@@ -127,13 +140,13 @@ const LandingNavBar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div class="md:hidden fixed inset-0 flex flex-col p-8 bg-[#F3F5F8] w-full">
+        <div className="md:hidden fixed inset-0 flex flex-col p-8 bg-[#F3F5F8] w-full">
           {/* ... mobile navigation links ... */}
           <ul className="space-y-5 backdrop-blur-2xl bg-white/30 w-full">
             <li className="border-b">
-              <Link href="/" onClick={toggleMobileMenu}>
+              <a href="/" onClick={toggleMobileMenu}>
                 Home
-              </Link>
+              </a>
             </li>
             <li className="relative z-30 border-b w-full">
               <div
@@ -148,33 +161,12 @@ const LandingNavBar = () => {
                   }}
                 />
               </div>
-              {aboutDropdownOpen && (
-                <ul className="absolute top-full left-0 bg-white shadow-md p-2 rounded-sm w-96 gap-8 h-62">
-                  {/* Dropdown content */}
-                  <li>
-                    <Link
-                      id="about"
-                      href="/about"
-                      className="block border-b py-2 px-4 text-gray-800 hover:text-orange-500 transition duration-300"
-                    >
-                      Who We Are
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/team"
-                      className="block py-2  border-b px-4 text-gray-800 hover:text-orange-500 transition duration-300"
-                    >
-                      Our Team
-                    </Link>
-                  </li>
-                </ul>
-              )}
+              {/* Dropdown content */}
             </li>
             <li className="border-b w-full">
-              <Link href="/Our-lawyer" onClick={toggleMobileMenu} className="mb-4">
+              <a href="/Our-lawyer" onClick={toggleMobileMenu} className="mb-4">
                 Our Lawyers
-              </Link>
+              </a>
             </li>
             <li className="relative z-20 border-b w-full">
               <div
@@ -189,27 +181,7 @@ const LandingNavBar = () => {
                   }}
                 />
               </div>
-              {expertiseDropdownOpen && (
-                <ul className="absolute top-full left-0 bg-white shadow-md p-2 rounded-sm w-96 gap-8 h-62">
-                  <li>
-                    <Link
-                      href="/practice-areas"
-                      id="practice-areas"
-                      className="block border-b py-2 px-4 text-gray-800 hover:text-orange-500 transition duration-300"
-                    >
-                      Practise Area
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/sector"
-                      className="block border-b py-2 px-4 text-gray-800 hover:text-orange-500 transition duration-300"
-                    >
-                      Sectors
-                    </Link>
-                  </li>
-                </ul>
-              )}
+              {/* Dropdown content */}
             </li>
             <li className="border-b w-full">
               <Link href="/contact">
@@ -224,7 +196,6 @@ const LandingNavBar = () => {
                 </button>
               </Link>
             </li>
-            
           </ul>
           <div className="flex items-center">
             <button
