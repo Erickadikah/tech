@@ -113,8 +113,8 @@ const LandingNavBar = () => {
             <GoArrowUpRight size={20} className="ml-2" />
           </ScrollLink>
         </li>
-        <a
-          target="_blank"
+        <Link
+          tLinkrget="_blank"
           rel="noreferrer"
           href="#"
         >
@@ -124,7 +124,7 @@ const LandingNavBar = () => {
             Get Started
             <IoLogInOutline size={30} className="ml-2" />
           </button>
-        </a>
+        </Link>
       </ul>
 
       {/* Mobile Navigation */}
@@ -144,9 +144,9 @@ const LandingNavBar = () => {
           {/* ... mobile navigation links ... */}
           <ul className="space-y-5 backdrop-blur-2xl bg-white/30 w-full">
             <li className="border-b">
-              <a href="/" onClick={toggleMobileMenu}>
+              <Link href="/" onClick={toggleMobileMenu}>
                 Home
-              </a>
+              </Link>
             </li>
             <li className="relative z-30 border-b w-full">
               <div
@@ -164,9 +164,9 @@ const LandingNavBar = () => {
               {/* Dropdown content */}
             </li>
             <li className="border-b w-full">
-              <a href="/Our-lawyer" onClick={toggleMobileMenu} className="mb-4">
+              <Link href="/Our-lawyer" onClick={toggleMobileMenu} className="mb-4">
                 Our Lawyers
-              </a>
+              </Link>
             </li>
             <li className="relative z-20 border-b w-full">
               <div
