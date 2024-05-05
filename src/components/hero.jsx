@@ -19,14 +19,14 @@ const Hero = () => {
       className="lg:h-[95vh] h-[85vh] sm:h-[40vh] relative"
       id="hero"
       style={{ 
-        backgroundImage: 'url("/images/ideas.jpg")', // Background image URL
+        backgroundImage: 'url("/images/hero.jpeg")', // Background image URL
         objectFit: 'cover', // Ensure the image covers the container
         backgroundSize: 'cover', // Make sure the background image covers the entire container
         backgroundPosition: 'center', // Center the background image
         backgroundRepeat: 'no-repeat', // Don't repeat the background image
       }}
     >
-      <div className="absolute inset-0 bg-[#11021F] opacity-90"></div>
+      <div className="absolute inset-0 bg-black opacity-90"></div>
       <div className="">
         <div className="container mx-auto px-4 relative z-0 ">
           <div className="flex flex-col md:flex-row items-center gap-4 lg:py-20 py-10">

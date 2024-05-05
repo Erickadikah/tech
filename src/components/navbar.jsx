@@ -58,7 +58,7 @@ const LandingNavBar = () => {
   
 
   return (
-    <nav className={`${scrollNav ? 'backdrop-blur-xl text-white bg-white/30' : 'text-white bg-[#11021F] opacity-90'} w-full md:h-20 flex items-center justify-between px-8 md:px-14 sticky top-0 shadow-sm z-10`}>
+    <nav className={`${scrollNav ? 'backdrop-blur-xl text-white bg-white/30' : 'text-white bg-black opacity-90'} w-full md:h-20 flex items-center justify-between px-8 md:px-14 sticky top-0 shadow-sm z-10`}>
       {/* Desktop Navigation (Centered) */}
       <ul className="hidden md:flex justify-center items-center gap-8 space-x-4 flex-grow">
         <li>

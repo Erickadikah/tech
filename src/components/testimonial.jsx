@@ -69,7 +69,7 @@ const Testimonials = () => {
   // Testimonial component
   const Testimonial = ({ id, name, image, review, helpfulCount, position }) => {
     return (
-      <div className="max-w-lg mx-auto overflow-hidden bg-white shadow-md rounded-lg">
+      <div className="max-w-lg mx-auto overflow-hidden bg-white shadow-md rounded-sm">
         <div className="p-4 md:p-6">
           <div className="flex items-center justify-between">
             <div>
