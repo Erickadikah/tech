@@ -59,7 +59,7 @@ const Hero = () => {
               }}
               transition={{ duration: 1 }}
             >
-              <h1 className="text-4xl md:text-7xl font-bold text-blue-500 leading-tight lg:mb-2 mb-8 mt-20 lg:mt-0">
+              <h1 className="text-4xl md:text-7xl font-bold text-blue-500 leading-tight lg:mb-2 mb-8 mt-10 lg:mt-0">
                 Empowering Businesses with Tech Solutions
               </h1>
               <p className="text-sm lg:text-lg text-white mb-8">

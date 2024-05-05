@@ -140,9 +140,9 @@ const LandingNavBar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 flex flex-col p-8 bg-[#F3F5F8] w-full">
+        <div className="md:hidden fixed inset-0 flex flex-col p-8 bg-blue-500 w-full">
           {/* ... mobile navigation links ... */}
-          <ul className="space-y-5 backdrop-blur-2xl bg-white/30 w-full">
+          <ul className="space-y-5  bg-black w-full">
             <li className="border-b">
               <Link href="/" onClick={toggleMobileMenu}>
                 Home
