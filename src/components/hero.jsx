@@ -1,14 +1,33 @@
-/* eslint-disable react/no-unescaped-entities */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image"; // Importing Next.js Image component for optimized image rendering
 import Partners from "./partners";
 import SoftwareRequestForm from "./SoftwareRequestForm";
 import { IoCloseCircle } from "react-icons/io5"; // Importing close icon from react-icons/io5
 import { Link as ScrollLink } from "react-scroll"; // Importing ScrollLink component from react-scroll
 import { LuArrowDownCircle } from "react-icons/lu"; // Importing down arrow icon from react-icons/lu
+import { motion } from "framer-motion";
 
 const Hero = () => {
   const [showForm, setShowForm] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [animateHero, setAnimateHero] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Check if animation has not occurred yet
+    if (!animateHero) {
+      setAnimateHero(true); // Trigger animation
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -16,7 +35,7 @@ const Hero = () => {
 
   return (
     <div
-      className="lg:h-[95vh] h-[85vh] sm:h-[40vh] relative"
+      className="lg:h-[95vh] h-[88vh] sm:h-[40vh] relative"
       id="hero"
       style={{ 
         backgroundImage: 'url("/images/hero.jpeg")', // Background image URL
@@ -29,9 +48,17 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black opacity-90"></div>
       <div className="">
         <div className="container mx-auto px-4 relative z-0 ">
-          <div className="flex flex-col md:flex-row items-center gap-4 lg:py-20 py-10">
-            <div className="md:w-1/2 lg:mb-8 md:mb-0 md:text-left lg:mt-20 mt-0">
-              <h1 className="text-4xl md:text-7xl font-bold text-blue-500 leading-tight mb-6">
+          <div className="flex flex-col md:flex-row items-center gap-8 lg:py-20 py-4">
+            <motion.div 
+              className="md:w-1/2 lg:mb-8 md:mb-0 md:text-left lg:mt-20 mt-0"
+              initial={{ opacity: 0, y: 100 }}
+              animate={{
+                opacity: animateHero ? 1 : 0,
+                y: animateHero ? 0 : 100,
+              }}
+              transition={{ duration: 1 }}
+            >
+              <h1 className="text-4xl md:text-7xl font-bold text-blue-500 leading-tight lg:mb-2 mb-8 mt-20 lg:mt-0">
                 Empowering Businesses with Tech Solutions
               </h1>
               <p className="text-sm lg:text-lg text-white mb-8">
@@ -55,8 +82,15 @@ const Hero = () => {
                   Request Service
                 </button>
               </div>
-            </div>
-            <div className="md:w-1/2 overflow-hidden ">
+            </motion.div>
+            <motion.div className="md:w-1/2 overflow-hidden "
+              initial={{ opacity: 0, x: -100 }}
+              animate={{
+                opacity: animateHero ? 1 : 0,
+                x: animateHero ? 0 : -100,
+              }}
+              transition={{ duration: 1 }}
+            >
               <Image
                 src="/images/tech.png" // Image source URL
                 alt="hero-image"
@@ -64,7 +98,7 @@ const Hero = () => {
                 width={1000} // Image width
                 height={200} // Image height
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
