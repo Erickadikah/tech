@@ -13,21 +13,21 @@ const Hero = () => {
   const [animateHero, setAnimateHero] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+  };
 
-    window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", handleScroll);
 
-    // Check if animation has not occurred yet
-    if (!animateHero) {
-      setAnimateHero(true); // Trigger animation
-    }
+  // Check if animation has not occurred yet
+  if (!animateHero) {
+    setAnimateHero(true); // Trigger animation
+  }
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [animateHero]);
 
   const toggleForm = () => {
     setShowForm(!showForm);
