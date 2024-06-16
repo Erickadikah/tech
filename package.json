@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "node server.js",
+    "dev": "node api.js && node server.js",
+    "build": "node api.js && next build",
+    "start": "node api.js && node server.js",
     "lint": "next lint"
   },
   "dependencies": {

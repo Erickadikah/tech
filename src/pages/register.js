@@ -20,7 +20,7 @@ const Register = () => {
     if (res.ok) {
       const { token } = await res.json();
       localStorage.setItem('token', token);
-      router.push('/'); // Redirect to home page
+      router.push('/Portal'); // Redirect to home page
     } else {
       const { error } = await res.json();
       setError(error);
