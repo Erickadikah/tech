@@ -1,12 +1,12 @@
-import jwt from 'jsonwebtoken';
+const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-export function generateToken(user) {
-  return jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
+function generateToken(user) {
+  return jwt.sign({ id: user._id.toString(), email: user.email }, JWT_SECRET, { expiresIn: '1h' });
 }
 
-export function verifyToken(token) {
+function verifyToken(token) {
   try {
     return jwt.verify(token, JWT_SECRET);
   } catch (err) {
@@ -14,3 +14,8 @@ export function verifyToken(token) {
     return null;
   }
 }
+
+module.exports = {
+  generateToken,
+  verifyToken
+};

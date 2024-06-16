@@ -5,6 +5,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoLogInOutline } from "react-icons/io5";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const LandingNavBar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,7 +13,9 @@ const LandingNavBar = () => {
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [expertiseDropdownOpen, setExpertiseDropdownOpen] = useState(false);
   const [publicationDropdownOpen, setPublicationDropdownOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const router = useRouter();
 
   const toggleAboutDropdown = () => {
     setAboutDropdownOpen(!aboutDropdownOpen);
@@ -55,7 +58,11 @@ const LandingNavBar = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  
+  useEffect(() => {
+    // Check if user is logged in by looking for a token in local storage
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
 
   return (
     <nav className={`${scrollNav ? 'backdrop-blur-xl text-white bg-white/30' : 'text-white bg-black opacity-90'} w-full md:h-20 flex items-center justify-between px-8 md:px-14 sticky top-0 shadow-sm z-10`}>
@@ -81,16 +88,6 @@ const LandingNavBar = () => {
             About Us
           </ScrollLink>
         </li>
-        {/*<li>
-          <ScrollLink
-            to="services"
-            smooth={true}
-            duration={500}
-            className={`first-line:text-base cursor-pointer ${scrollNav ? 'text-black' : 'text-white'}`}
-          >
-            Services
-          </ScrollLink>
-  </li>*/}
         <li>
           <ScrollLink
             to="faq"
@@ -113,18 +110,34 @@ const LandingNavBar = () => {
             <GoArrowUpRight size={20} className="ml-2" />
           </ScrollLink>
         </li>
-        <Link
-          tLinkrget="_blank"
-          rel="noreferrer"
-          href="/register"
-        >
-          <button
-            className={`first-line:text-base ${scrollNav ? 'text-black' : 'text-white'} px-6 border-2 border-blue-500 py-2 text-base lg:text-md xl:text-lg border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-blue-500 focus:outline-none rounded-sm focus:bg-yellow-600 transform hover:scale-100 transition-transform flex items-center`}
-          >
-            Get Started
-            <IoLogInOutline size={30} className="ml-2" />
-          </button>
-        </Link>
+        {isLoggedIn ? (
+          router.pathname === "/Portal" ? (
+            <Link href="/">
+              <button
+                className={`first-line:text-base ${scrollNav ? 'text-black' : 'text-white'} px-6 border-2 border-blue-500 py-2 text-base lg:text-md xl:text-lg border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-blue-500 focus:outline-none rounded-sm focus:bg-yellow-600 transform hover:scale-100 transition-transform flex items-center`}
+              >
+                Home
+              </button>
+            </Link>
+          ) : (
+            <Link href="/Portal">
+              <button
+                className={`first-line:text-base ${scrollNav ? 'text-black' : 'text-white'} px-6 border-2 border-blue-500 py-2 text-base lg:text-md xl:text-lg border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-blue-500 focus:outline-none rounded-sm focus:bg-yellow-600 transform hover:scale-100 transition-transform flex items-center`}
+              >
+                Portal
+              </button>
+            </Link>
+          )
+        ) : (
+          <Link href="/register">
+            <button
+              className={`first-line:text-base ${scrollNav ? 'text-black' : 'text-white'} px-6 border-2 border-blue-500 py-2 text-base lg:text-md xl:text-lg border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-blue-500 focus:outline-none rounded-sm focus:bg-yellow-600 transform hover:scale-100 transition-transform flex items-center`}
+            >
+              Get Started
+              <IoLogInOutline size={30} className="ml-2" />
+            </button>
+          </Link>
+        )}
       </ul>
 
       {/* Mobile Navigation */}
@@ -141,8 +154,7 @@ const LandingNavBar = () => {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden fixed inset-0 flex flex-col p-8 bg-blue-500 w-full">
-          {/* ... mobile navigation links ... */}
-          <ul className="space-y-5  bg-black w-full">
+          <ul className="space-y-5 bg-black w-full">
             <li className="border-b">
               <Link href="/" onClick={toggleMobileMenu}>
                 Home
@@ -161,7 +173,6 @@ const LandingNavBar = () => {
                   }}
                 />
               </div>
-              {/* Dropdown content */}
             </li>
             <li className="border-b w-full">
               <Link href="/Our-lawyer" onClick={toggleMobileMenu} className="mb-4">
@@ -181,15 +192,11 @@ const LandingNavBar = () => {
                   }}
                 />
               </div>
-              {/* Dropdown content */}
             </li>
             <li className="border-b w-full">
               <Link href="/contact">
                 <button
-                  className="px-4 py-2 text-base font-semibold text-black   focus:outline-none focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center mb-4"
-                  style={{
-                    // background: "rgb(208,178,22)",
-                  }}
+                  className="px-4 py-2 text-base font-semibold text-black focus:outline-none focus:bg-yellow-600 transform hover:scale-105 transition-transform flex items-center mb-4"
                 >
                   Contact Us
                   <GoArrowUpRight size={20} className="ml-2" />
@@ -213,3 +220,4 @@ const LandingNavBar = () => {
 };
 
 export default LandingNavBar;
+

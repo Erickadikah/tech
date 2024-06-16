@@ -1,36 +1,50 @@
-import { initPrimus } from '../../../primus';
+const { initPrimus } = require('../../../primus');
 
-// Handler function for the API endpoint
-export default function handler(req, res) {
-  // Get the HTTP server instance from the response socket
+export default async function handler(req, res) {
   const httpServer = res.socket.server;
 
-  // Initialize Primus if it's not already initialized
-  if (!httpServer.primus) {
-    console.log('Initializing Primus...');
-    const primus = initPrimus(httpServer);
-    httpServer.primus = primus;
-  }
+  try {
+    // Initialize Primus if not already initialized
+    if (!httpServer.primus) {
+      console.log('Initializing Primus...');
+      httpServer.primus = await initPrimus(httpServer);
+    }
 
-  // Generate the Primus library and send it as a response
-  httpServer.primus.library((err, library) => {
-    if (err) {
-      // If an error occurs, send a 500 response with an error message
-      console.error('Primus library error:', err);
-      res.status(500).send('Error serving Primus library');
-    } else {
-      // If successful, set the Content-Type header and send the library
+    // Ensure httpServer.primus is properly initialized before using it
+    if (!httpServer.primus || typeof httpServer.primus.library !== 'function') {
+      throw new Error('Primus initialization error or library function not available');
+    }
+
+    // Serve the Primus client library
+    httpServer.primus.library((err, library) => {
+      if (err) {
+        console.error('Primus library error:', err);
+        if (!res.headersSent) {
+          res.status(500).send('Error serving Primus library');
+        }
+        return;
+      }
+
       res.setHeader('Content-Type', 'text/javascript');
       res.send(library);
+    });
+
+    // Log when the response is sent
+    res.on('finish', () => {
+      console.log('Response sent for /api/primus-client');
+    });
+
+    // Handle errors in sending response
+    res.on('error', (err) => {
+      console.error('Error in sending response:', err);
+      if (!res.headersSent) {
+        res.status(500).send('Internal Server Error');
+      }
+    });
+  } catch (err) {
+    console.error('Primus initialization error:', err);
+    if (!res.headersSent) {
+      res.status(500).send('Internal Server Error');
     }
-  });
-
-  res.on('close', () => {
-    console.log('Response closed for /api/primus');
-  });
-
-  res.on('error', (err) => {
-    console.error('Error in sending response:', err);
-    res.status(500).send('Internal Server Error');
-  });
+  }
 }

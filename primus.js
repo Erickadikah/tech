@@ -1,87 +1,87 @@
 const Primus = require('primus');
 const { verifyToken } = require('./utils/auth');
+const clientPromise = require('./utils/mongodb');
 
 let primus;
 
-function initPrimus(server) {
+async function initPrimus(server) {
   if (!primus) {
-    console.log('Initializing Primus...');
-    primus = new Primus(server, { transformer: 'websockets' });
+    try {
+      console.log('Initializing Primus...');
+      primus = new Primus(server, { transformer: 'websockets' });
 
-    // Authentication middleware
-    primus.use('auth', (spark, next) => {
-      const token = spark.query.token;
-      const user = verifyToken(token);
+      // Authentication middleware
+      primus.use('auth', async (spark, next) => {
+        const token = spark.query.token;
+        if (!token) {
+          const err = new Error('Authentication token missing');
+          err.statusCode = 401;
+          return next(err);
+        }
 
-      if (user) {
-        spark.user = user;
-        return next();
-      }
+        try {
+          const decoded = verifyToken(token);
+          if (!decoded || !decoded.id) {
+            const err = new Error('Invalid token');
+            err.statusCode = 401;
+            return next(err);
+          }
 
-      const err = new Error('Authentication failed');
-      err.statusCode = 401;
-      next(err);
-    });
+          // Fetch user from MongoDB
+          const dbClient = await clientPromise;
+          const db = dbClient.db();
+          const users = db.collection('users');
+          const user = await users.findOne({ _id: ObjectId(decoded.id) });
 
-    // Log connections and disconnections
-    primus.on('connection', (spark) => {
-      console.log('New connection:', spark.id, 'User:', spark.user);
+          if (!user) {
+            const err = new Error('User not found');
+            err.statusCode = 401;
+            return next(err);
+          }
 
-      // Log disconnection
-      spark.on('end', () => {
-        console.log('Connection ended:', spark.id, 'User:', spark.user);
+          // Attach user to the spark
+          spark.user = user;
+          console.log('User connected:', user._id); // Log user ID here
+          next();
+        } catch (err) {
+          console.error('JWT verification failed:', err);
+          err.statusCode = 401;
+          next(err);
+        }
       });
 
-      // Handle incoming data
-      spark.on('data', (data) => {
-        console.log('Received data:', data);
-        // Echo the received message back to the client
-        spark.write(`Echo: ${data}`);
-      });
-
-      // Custom event example
-      spark.on('custom-event', (data) => {
-        console.log('Custom event received:', data);
-        // Handle custom event
-      });
-    });
-
-    // Broadcast message to all connected clients
-    primus.on('broadcast', (message) => {
-      primus.forEach((spark) => {
-        spark.write(message);
-      });
-    });
-
-    // Example of creating rooms (requires additional logic)
-    const rooms = {};
-
-    primus.on('join-room', (spark, roomName) => {
-      if (!rooms[roomName]) {
-        rooms[roomName] = [];
-      }
-      rooms[roomName].push(spark);
-      spark.room = roomName;
-      console.log(`Spark ${spark.id} joined room ${roomName}`);
-    });
-
-    primus.on('leave-room', (spark) => {
-      const roomName = spark.room;
-      if (roomName && rooms[roomName]) {
-        rooms[roomName] = rooms[roomName].filter((s) => s !== spark);
-        console.log(`Spark ${spark.id} left room ${roomName}`);
-      }
-    });
-
-    primus.on('room-message', (roomName, message) => {
-      if (rooms[roomName]) {
-        rooms[roomName].forEach((spark) => {
-          spark.write(message);
+      // Handle other Primus events like connection, disconnection, etc.
+      primus.on('connection', (spark) => {
+        console.log('New connection:', spark.id, 'User:', spark.user);
+        
+        spark.on('data', (data) => {
+          console.log('Received data from client:', data);
+          spark.write(`Server received: ${data}`);
         });
-      }
-    });
+
+        spark.on('end', () => {
+          console.log('Connection ended:', spark.id);
+        });
+      });
+
+      primus.on('disconnection', (spark) => {
+        console.log('Disconnected:', spark.id);
+      });
+
+      primus.on('error', (err) => {
+        console.error('Primus error:', err);
+      });
+
+      console.log('Primus initialized successfully.');
+    } catch (err) {
+      console.error('Error initializing Primus:', err);
+      primus = null;
+      throw err;
+    }
   }
+
   return primus;
 }
 
 module.exports = { initPrimus };
+
