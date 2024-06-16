@@ -1,45 +1,35 @@
-import { useEffect } from 'react';
+import { initPrimus } from '../../../primus';
 
-const PrimusClient = () => {
-  useEffect(() => {
-    // Fetch the API to ensure Primus is initialized
-    fetch('/api/primus')
-      .then(() => {
-        // Load Primus client script dynamically
-        const script = document.createElement('script');
-        script.src = '/api/primus-client';
-        script.onload = () => {
-          // Primus client script loaded, establish connection
-          const primus = new Primus(); // Assuming Primus constructor is globally available
-          
-          // Add event listeners for Primus connection events
-          primus.on('open', () => {
-            console.log('Connection open');
-            primus.write('Hello server!');
-          });
+export default function handler(req, res) {
+  const httpServer = res.socket.server;
 
-          primus.on('data', (data) => {
-            console.log('Received from server:', data);
-          });
+  if (!httpServer.primus) {
+    console.log('Initializing Primus...');
+    const primus = initPrimus(httpServer);
+    httpServer.primus = primus;
+  }
 
-          primus.on('end', () => {
-            console.log('Connection closed');
-          });
+  httpServer.primus.library((err, library) => {
+    if (err) {
+      console.error('Primus library error:', err);
+      if (!res.headersSent) {
+        res.status(500).send('Error serving Primus library');
+      }
+    } else {
+      res.setHeader('Content-Type', 'text/javascript');
+      res.send(library);
+    }
+  });
 
-          // Optionally return cleanup function if needed
-          return () => {
-            primus.end(); // Clean up the connection when the component unmounts
-          };
-        };
+  // Log when response is sent
+  res.on('finish', () => {
+    console.log('Response sent for /api/primus');
+  });
 
-        document.body.appendChild(script);
-      })
-      .catch((error) => {
-        console.error('Error initializing Primus:', error);
-      });
-  }, []); // Ensure this effect runs only once
-
-  return null; // This component doesn't render anything
-};
-
-export default PrimusClient;
+  res.on('error', (err) => {
+    console.error('Error in sending response:', err);
+    if (!res.headersSent) {
+      res.status(500).send('Internal Server Error');
+    }
+  });
+}

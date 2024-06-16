@@ -14,7 +14,7 @@ function initPrimus(server) {
       const user = verifyToken(token);
 
       if (user) {
-        spark.user = user; // Attach user to the spark object
+        spark.user = user;
         return next();
       }
 
@@ -23,18 +23,62 @@ function initPrimus(server) {
       next(err);
     });
 
+    // Log connections and disconnections
     primus.on('connection', (spark) => {
-      console.log('New connection:', spark.id, 'User:', spark.user); // Log new connections and associated user
-      
-      // Send user information to the client
-      spark.write({ type: 'user', user: spark.user });
-      console.log('Sent user information:', spark.user);
+      console.log('New connection:', spark.id, 'User:', spark.user);
 
+      // Log disconnection
+      spark.on('end', () => {
+        console.log('Connection ended:', spark.id, 'User:', spark.user);
+      });
+
+      // Handle incoming data
       spark.on('data', (data) => {
         console.log('Received data:', data);
+        // Echo the received message back to the client
         spark.write(`Echo: ${data}`);
-        console.log('Sent data:', `Echo: ${data}`);
       });
+
+      // Custom event example
+      spark.on('custom-event', (data) => {
+        console.log('Custom event received:', data);
+        // Handle custom event
+      });
+    });
+
+    // Broadcast message to all connected clients
+    primus.on('broadcast', (message) => {
+      primus.forEach((spark) => {
+        spark.write(message);
+      });
+    });
+
+    // Example of creating rooms (requires additional logic)
+    const rooms = {};
+
+    primus.on('join-room', (spark, roomName) => {
+      if (!rooms[roomName]) {
+        rooms[roomName] = [];
+      }
+      rooms[roomName].push(spark);
+      spark.room = roomName;
+      console.log(`Spark ${spark.id} joined room ${roomName}`);
+    });
+
+    primus.on('leave-room', (spark) => {
+      const roomName = spark.room;
+      if (roomName && rooms[roomName]) {
+        rooms[roomName] = rooms[roomName].filter((s) => s !== spark);
+        console.log(`Spark ${spark.id} left room ${roomName}`);
+      }
+    });
+
+    primus.on('room-message', (roomName, message) => {
+      if (rooms[roomName]) {
+        rooms[roomName].forEach((spark) => {
+          spark.write(message);
+        });
+      }
     });
   }
   return primus;

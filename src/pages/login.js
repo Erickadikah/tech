@@ -1,25 +1,26 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
 
     if (res.ok) {
       const { token } = await res.json();
-      localStorage.setItem('token', token);
-      router.push('/'); // Redirect to home page or dashboard
+      localStorage.setItem("token", token);
+      router.push("/"); // Redirect to home page
     } else {
       const { error } = await res.json();
       setError(error);
@@ -27,13 +28,26 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div
+      className="flex justify-center items-center h-screen"
+      style={{
+        backgroundImage: 'url("/images/ideas.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        repeat: "no-repeat",
+      }}
+    >
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h1 className="text-3xl text-center mb-6">Login</h1>
         {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email</label>
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -44,7 +58,12 @@ const Login = () => {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password</label>
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -61,6 +80,19 @@ const Login = () => {
             Login
           </button>
         </form>
+        <p>
+          Dont have an account?{' '}
+          <Link
+            href="/regiter"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push('/register');
+            }}
+            className="text-blue-500 hover:text-blue-700"
+          >
+            Register
+          </Link>
+        </p>
       </div>
     </div>
   );

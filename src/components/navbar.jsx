@@ -116,7 +116,7 @@ const LandingNavBar = () => {
         <Link
           tLinkrget="_blank"
           rel="noreferrer"
-          href="#"
+          href="/register"
         >
           <button
             className={`first-line:text-base ${scrollNav ? 'text-black' : 'text-white'} px-6 border-2 border-blue-500 py-2 text-base lg:text-md xl:text-lg border-r:bg-gradient-to-b from-gray-800 to-gray-900 hover:bg-blue-500 focus:outline-none rounded-sm focus:bg-yellow-600 transform hover:scale-100 transition-transform flex items-center`}
